@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<robot name="mover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find mover_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find mover_description)/urdf/mover.ros2control" />
+<xacro:include filename="$(find mover_description)/urdf/mover.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0 0.02 0.0" rpy="0 0 0"/>
+    <mass value="0.6376650441064023"/>
+    <inertia ixx="0.001281" iyy="0.001731" izz="0.000619" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lwf_1">
+  <inertial>
+    <origin xyz="0.0049999999999999975 -1.0408340855860843e-17 0.0" rpy="0 0 0"/>
+    <mass value="0.030860257335294242"/>
+    <inertia ixx="1.6e-05" iyy="8e-06" izz="8e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.055 -0.02 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/lwf_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.055 -0.02 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/lwf_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lwb_1">
+  <inertial>
+    <origin xyz="0.0049999999999999975 -1.0408340855860843e-17 0.0" rpy="0 0 0"/>
+    <mass value="0.030860257335294242"/>
+    <inertia ixx="1.6e-05" iyy="8e-06" izz="8e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.055 -0.02 0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/lwb_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.055 -0.02 0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/lwb_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rwb_1">
+  <inertial>
+    <origin xyz="-0.005000000000000011 -1.0408340855860843e-17 0.0" rpy="0 0 0"/>
+    <mass value="0.030860257335294242"/>
+    <inertia ixx="1.6e-05" iyy="8e-06" izz="8e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 -0.02 0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/rwb_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.055 -0.02 0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/rwb_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rwf_1">
+  <inertial>
+    <origin xyz="-0.005000000000000011 -1.0408340855860843e-17 0.0" rpy="0 0 0"/>
+    <mass value="0.030860257335294242"/>
+    <inertia ixx="1.6e-05" iyy="8e-06" izz="8e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 -0.02 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/rwf_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.055 -0.02 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mover_description)/meshes/rwf_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="continuous">
+  <origin xyz="0.055 0.02 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lwf_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolute 2" type="continuous">
+  <origin xyz="0.055 0.02 -0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lwb_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolute 3" type="continuous">
+  <origin xyz="-0.055 0.02 -0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rwb_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolute 4" type="continuous">
+  <origin xyz="-0.055 0.02 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rwf_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+</robot>
